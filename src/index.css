@@ -1,8 +1,13 @@
 @import url('bootstrap');
 @import url('bootstrap-icons');
+@import url('@fontsource/pt-sans');
+
+body {
+    font-family: 'PT Sans', sans-serif;
+}
 
 .logo {
-    width: 150px;
+    width: 100px;
 }
 
 .card {
