@@ -23,6 +23,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/films" element={<FilmsPage />} />
             <Route path="/films/:id" element={<SingleFilmPage />} />
+            <Route path="*" element={<h1 className="text-center py-5">404 - Pagina non trovata</h1>} />
           </Route>
         </Routes>
       </BrowserRouter>

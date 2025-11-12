@@ -5,12 +5,36 @@ import axios from "axios";
 export default function SingleFilmPage() {
     const { id } = useParams();
     const [film, setFilm] = useState(null);
+    const [reviews, setReviews] = useState([]);
+    const [formData, setFormData] = useState({
+        username: "",
+        review: "",
+        average_rating: ""
+    });
 
     useEffect(() => {
         axios.get(`http://localhost:3000/api/films/${id}`)
             .then(res => setFilm(res.data))
             .catch(err => console.error("Errore nel caricamento del film:", err));
     }, [id]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        axios.post(`http://localhost:3000/api/films/${id}/reviews`, formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+        })
+            .then(() => {
+                setFormData({
+                    username: "",
+                    review: "",
+                    average_rating: ""
+                });
+                return axios.get(`http://localhost:3000/api/films/${id}`);
+            })
+            .then(res => setFilm(res.data))
+            .catch(err => console.error("Errore nell'invio della recensione:", err));
+    }
 
     if (!film) return <p className="text-center py-5">Caricamento...</p>;
 
@@ -43,7 +67,7 @@ export default function SingleFilmPage() {
             <section className="mb-5">
                 <div className="container">
                     <h3 className="mb-4">Lascia la tua recensione</h3>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="username" className="form-label">Il tuo nome</label>
                             <input
@@ -52,6 +76,8 @@ export default function SingleFilmPage() {
                                 className="form-control"
                                 id="username"
                                 placeholder="anonimo"
+                                value={formData.username}
+                                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                             />
                         </div>
                         <div className="mb-3">
@@ -61,14 +87,18 @@ export default function SingleFilmPage() {
                                 className="form-control"
                                 id="review"
                                 rows="3"
+                                value={formData.review}
+                                onChange={(e) => setFormData({ ...formData, review: e.target.value })}
                             ></textarea>
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="rating" className="form-label">Il tuo voto</label>
+                            <label htmlFor="average_rating" className="form-label">Il tuo voto</label>
                             <select
-                                name="rating"
+                                name="average_rating"
                                 className="form-select"
-                                id="rating"
+                                id="average_rating"
+                                value={formData.average_rating}
+                                onChange={(e) => setFormData({ ...formData, average_rating: e.target.value })}
                             >
                                 <option value="">-- Seleziona un voto --</option>
                                 <option value="1">⭐ 1 - Pessimo</option>

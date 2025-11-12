@@ -24,11 +24,12 @@ export default function FilmCard({ film }) {
                         <li><strong>Durata:</strong> {film.duration} min</li>
                         <li><strong>Lingua:</strong> {film.language}</li>
                     </ul>
-                    <button className="btn btn-dark">
+                    <div className="d-flex justify-content-end">
                         <Link to={`/films/${film.id}`} style={{ textDecoration: "none", color: "inherit" }}>
-                            Dettagli
+                            <button className="btn btn-dark">Dettagli
+                            </button>
                         </Link>
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
