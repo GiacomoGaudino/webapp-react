@@ -41,8 +41,8 @@ export default function SingleFilmPage() {
     return (
         <>
             <div className="p-5 mb-4 bg-light rounded-3">
-                <div className="container-fluid py-5 d-flex flex-column flex-md-row gap-4">
-                    <div className="cover col-12 col-md-5">
+                <div className="container-fluid py-4 d-flex flex-column flex-md-row gap-4 align-items-start px-md-5">
+                    <div className="cover col-12 col-md-4" style={{ maxWidth: "300px", maxHeight: "450px", overflow: "hidden" }}>
                         <img
                             className="img-fluid rounded shadow"
                             src={`http://localhost:3000${film?.cover_image}`}
@@ -50,12 +50,12 @@ export default function SingleFilmPage() {
                             style={{ objectFit: "cover", width: "100%", height: "100%" }}
                         />
                     </div>
-                    <div className="details col-12 col-md-7">
-                        <h1 className="display-5 fw-bold mb-2">{film?.name}</h1>
-                        <div className="text-muted mb-3">
+                    <div className="details col-12 col-md-8">
+                        <h2 className="display-6 fw-bold mb-2">{film?.name}</h2>
+                        <div className="text-muted mb-2">
                             🎬 <strong>Regista:</strong> {film?.director}
                         </div>
-                        <ul className="list-unstyled small mb-3">
+                        <ul className="list-unstyled small mb-2">
                             <li><strong>Data di uscita:</strong> {new Date(film?.release_date).toLocaleDateString()}</li>
                             <li><strong>Durata:</strong> {film?.duration} min</li>
                             <li><strong>Lingua:</strong> {film?.language}</li>
