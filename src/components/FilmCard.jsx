@@ -24,6 +24,11 @@ export default function FilmCard({ film }) {
                         <li><strong>Durata:</strong> {film.duration} min</li>
                         <li><strong>Lingua:</strong> {film.language}</li>
                     </ul>
+                    <button className="btn btn-dark">
+                        <Link to={`/films/${film.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                            Dettagli
+                        </Link>
+                    </button>
                 </div>
             </div>
         </div>

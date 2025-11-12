@@ -15,50 +15,101 @@ export default function SingleFilmPage() {
     if (!film) return <p className="text-center py-5">Caricamento...</p>;
 
     return (
-        <div className="container py-5">
-            <div className="card mx-auto" style={{ maxWidth: "800px" }}>
-                <img
-                    src={`http://localhost:3000${film.cover_image}`}
-                    alt={film.name}
-                    className="card-img-top film-detail-img"
-                    style={{ maxHeight: "1200px", objectFit: "cover" }}
-                />
-                <div className="card-body">
-                    <h2 className="card-title">{film.name}</h2>
-                    <h5 className="text-muted mb-3">Regista: {film.director}</h5>
-                    <p className="card-text">{film.synopsis}</p>
-                    <ul className="list-unstyled">
-                        <li><strong>Data di uscita:</strong> {new Date(film.release_date).toLocaleDateString()}</li>
-                        <li><strong>Durata:</strong> {film.duration} min</li>
-                        <li><strong>Lingua:</strong> {film.language}</li>
-                    </ul>
-                    <div className="mt-4">
-                        <h4>Recensioni</h4>
-                        {film.review && film.review.length > 0 ? (
-                            <div className="row g-3">
-                                {film.review.map(r => (
-                                    <div className="col-12" key={r.id}>
-                                        <div className="card border-secondary p-3 shadow-sm">
-                                            <div className="d-flex justify-content-between align-items-center mb-2">
-                                                <strong>{r.username}</strong>
-                                                <span className="badge bg-primary">
-                                                    {r.average_rating ? parseFloat(r.average_rating).toFixed(1) : "N/A"}/5
-                                                </span>
-                                            </div>
-                                            <p className="mb-0">{r.review}</p>
-                                            <small className="text-muted">
-                                                {new Date(r.created_at).toLocaleDateString()}
-                                            </small>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <p>Nessuna recensione disponibile.</p>
-                        )}
+        <>
+            <div className="p-5 mb-4 bg-light rounded-3">
+                <div className="container-fluid py-5 d-flex flex-column flex-md-row gap-4">
+                    <div className="cover col-12 col-md-5">
+                        <img
+                            className="img-fluid rounded shadow"
+                            src={`http://localhost:3000${film?.cover_image}`}
+                            alt={film?.name}
+                            style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                        />
+                    </div>
+                    <div className="details col-12 col-md-7">
+                        <h1 className="display-5 fw-bold mb-2">{film?.name}</h1>
+                        <div className="text-muted mb-3">
+                            🎬 <strong>Regista:</strong> {film?.director}
+                        </div>
+                        <ul className="list-unstyled small mb-3">
+                            <li><strong>Data di uscita:</strong> {new Date(film?.release_date).toLocaleDateString()}</li>
+                            <li><strong>Durata:</strong> {film?.duration} min</li>
+                            <li><strong>Lingua:</strong> {film?.language}</li>
+                        </ul>
+                        <p className="lead">{film?.synopsis}</p>
                     </div>
                 </div>
             </div>
-        </div>
+            <section className="mb-5">
+                <div className="container">
+                    <h3 className="mb-4">Lascia la tua recensione</h3>
+                    <form>
+                        <div className="mb-3">
+                            <label htmlFor="username" className="form-label">Il tuo nome</label>
+                            <input
+                                name="username"
+                                type="text"
+                                className="form-control"
+                                id="username"
+                                placeholder="anonimo"
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="review" className="form-label">La tua recensione</label>
+                            <textarea
+                                name="review"
+                                className="form-control"
+                                id="review"
+                                rows="3"
+                            ></textarea>
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="rating" className="form-label">Il tuo voto</label>
+                            <select
+                                name="rating"
+                                className="form-select"
+                                id="rating"
+                            >
+                                <option value="">-- Seleziona un voto --</option>
+                                <option value="1">⭐ 1 - Pessimo</option>
+                                <option value="2">⭐⭐ 2 - Così così</option>
+                                <option value="3">⭐⭐⭐ 3 - Buono</option>
+                                <option value="4">⭐⭐⭐⭐ 4 - Molto buono</option>
+                                <option value="5">⭐⭐⭐⭐⭐ 5 - Eccellente</option>
+                            </select>
+                        </div>
+                        <button type="submit" className="btn btn-dark">
+                            Invia recensione
+                        </button>
+                    </form>
+                </div>
+                <hr className="w-25 mx-auto pt-5 my-5" />
+                <div className="container">
+                    <h4 className="mb-4">Recensioni</h4>
+                    {film?.review && film.review.length > 0 ? (
+                        <div className="row g-3">
+                            {film.review.map((r) => (
+                                <div className="col-12" key={r.id}>
+                                    <div className="card border-secondary p-3 shadow-sm">
+                                        <div className="d-flex justify-content-between align-items-center mb-2">
+                                            <strong>{r.username}</strong>
+                                            <div className="vote text-warning position-absolute top-0 end-0 m-2">
+                                                {'★'.repeat(r.average_rating)}{'☆'.repeat(5 - r.average_rating)}
+                                            </div>
+                                        </div>
+                                        <p className="mb-0">{r.review}</p>
+                                        <small className="text-muted">
+                                            {new Date(r.created_at).toLocaleDateString()}
+                                        </small>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-muted">Nessuna recensione disponibile.</p>
+                    )}
+                </div>
+            </section>
+        </>
     );
 }
