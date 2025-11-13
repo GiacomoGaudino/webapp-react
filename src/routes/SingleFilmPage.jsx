@@ -1,9 +1,11 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import StarRating from "../components/StarRating";
+import GlobalContext from "../context/GlobalContext";
 
 export default function SingleFilmPage() {
+    const { setLoading } = useContext(GlobalContext);
     const { id } = useParams();
     const [film, setFilm] = useState(null);
     const [reviews, setReviews] = useState([]);
@@ -14,9 +16,11 @@ export default function SingleFilmPage() {
     });
 
     useEffect(() => {
+        setLoading(true);
         axios.get(`http://localhost:3000/api/films/${id}`)
             .then(res => setFilm(res.data))
-            .catch(err => console.error("Errore nel caricamento del film:", err));
+            .catch(err => console.error("Errore nel caricamento del film:", err))
+            .then(() => setLoading(false));
     }, [id]);
 
     const handleSubmit = (e) => {
@@ -37,7 +41,6 @@ export default function SingleFilmPage() {
             .catch(err => console.error("Errore nell'invio della recensione:", err));
     }
 
-    if (!film) return <p className="text-center py-5">Caricamento...</p>;
 
     return (
         <>

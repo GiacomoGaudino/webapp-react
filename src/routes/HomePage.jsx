@@ -8,8 +8,6 @@ export default function HomePage() {
             <AppJumbotron />
             <section className="position-relative py-5 d-flex justify-content-center align-items-center" style={{ minHeight: "400px" }}>
                 <div className="position-relative" style={{ width: "500px", height: "400px" }}>
-
-                    {/* Box principale (immagine) */}
                     <div
                         className="position-absolute rounded shadow-lg overflow-hidden"
                         style={{
