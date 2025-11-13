@@ -42,7 +42,7 @@ export default function SingleFilmPage() {
         <>
             <div className="p-5 mb-4 bg-light rounded-3">
                 <div className="container-fluid py-4 d-flex flex-column flex-md-row gap-4 align-items-start px-md-5">
-                    <div className="cover col-12 col-md-4" style={{ maxWidth: "300px", maxHeight: "450px", overflow: "hidden" }}>
+                    <div className="cover col-12 col-md-4" style={{ maxWidth: "350px", maxHeight: "500px", overflow: "hidden" }}>
                         <img
                             className="img-fluid rounded shadow"
                             src={`http://localhost:3000${film?.cover_image}`}
@@ -60,7 +60,7 @@ export default function SingleFilmPage() {
                             <li><strong>Durata:</strong> {film?.duration} min</li>
                             <li><strong>Lingua:</strong> {film?.language}</li>
                         </ul>
-                        <p className="lead">{film?.synopsis}</p>
+                        <p className="lead" style={{ textAlign: "justify" }}>{film?.synopsis}</p>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,13 @@
 @import url('bootstrap');
 @import url('bootstrap-icons');
 @import url('@fontsource/pt-sans');
+@import url('@fontsource-variable/montserrat');
+@import "@fontsource/montserrat/300.css";
+
 
 body {
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'montserrat', sans-serif;
+    font-weight: 300
 }
 
 .logo {
