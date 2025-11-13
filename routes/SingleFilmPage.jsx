@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import StarRating from "../src/components/StarRating";
 
 export default function SingleFilmPage() {
     const { id } = useParams();
@@ -42,13 +43,19 @@ export default function SingleFilmPage() {
         <>
             <div className="p-5 mb-4 bg-light rounded-3">
                 <div className="container-fluid py-4 d-flex flex-column flex-md-row gap-4 align-items-start px-md-5">
-                    <div className="cover col-12 col-md-4" style={{ maxWidth: "350px", maxHeight: "500px", overflow: "hidden" }}>
+                    <div className="cover col-12 col-md-4 position-relative" style={{ maxWidth: "350px", maxHeight: "500px", overflow: "hidden" }}>
                         <img
                             className="img-fluid rounded shadow"
                             src={`http://localhost:3000${film?.cover_image}`}
                             alt={film?.name}
                             style={{ objectFit: "cover", width: "100%", height: "100%" }}
                         />
+                        <div
+                            className="position-absolute top-0 end-0 m-3 bg-dark bg-opacity-50 p-2 rounded"
+                            style={{ zIndex: 2 }}
+                        >
+                            <StarRating average_rating={film.avg} />
+                        </div>
                     </div>
                     <div className="details col-12 col-md-8">
                         <h2 className="display-6 fw-bold mb-2">{film?.name}</h2>
@@ -123,9 +130,7 @@ export default function SingleFilmPage() {
                                     <div className="card border-secondary p-3 shadow-sm">
                                         <div className="d-flex justify-content-between align-items-center mb-2">
                                             <strong>{r.username}</strong>
-                                            <div className="vote text-warning position-absolute top-0 end-0 m-2">
-                                                {'★'.repeat(r.average_rating)}{'☆'.repeat(5 - r.average_rating)}
-                                            </div>
+                                            <StarRating average_rating={r.average_rating} />
                                         </div>
                                         <p className="mb-0">{r.review}</p>
                                         <small className="text-muted">

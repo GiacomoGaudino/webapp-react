@@ -1,18 +1,23 @@
 import { Link } from "react-router-dom";
+import StarRating from "./StarRating";
 
 export default function FilmCard({ film }) {
 
     return (
         <div className="col-md-4">
             <div className="card h-100 d-flex flex-column">
-                <Link to={`/films/${film.id}`}>
+                <div className="position-relative">
                     <img
                         src={`http://localhost:3000${film.cover_image}`}
                         className="card-img-top"
                         alt={film.name}
                         style={{ height: "600px", objectFit: "cover" }}
                     />
-                </Link>
+                    <div className="position-absolute top-0 end-0 m-3 bg-dark bg-opacity-50 p-2 rounded"
+                        style={{ zIndex: 2 }}>
+                        <StarRating average_rating={film.avg} />
+                    </div>
+                </div>
                 <div className="card-body d-flex flex-column">
                     <Link to={`/films/${film.id}`} style={{ textDecoration: "none", color: "inherit" }}>
                         <h4 className="card-title text-dark fw-bold">{film.name}</h4>
