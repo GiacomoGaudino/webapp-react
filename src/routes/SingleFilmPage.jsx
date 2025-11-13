@@ -41,6 +41,8 @@ export default function SingleFilmPage() {
             .catch(err => console.error("Errore nell'invio della recensione:", err));
     }
 
+    if (!film) return <p className="text-center py-5">Caricamento...</p>;
+
 
     return (
         <>

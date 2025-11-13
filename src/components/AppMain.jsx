@@ -28,10 +28,13 @@ export default function AppMain() {
             <main className="container py-4">
                 <h2 className="mb-4">Lista Film</h2>
                 <div className="row g-4">
-                    {films.map(film => (
-                        <FilmCard key={film.id} film={film} />
-                    ))
-                    }
+                    {films.length > 0 ? (
+                        films.map(film => (
+                            <FilmCard key={film.id} film={film} />
+                        ))
+                    ) : (
+                        <p>Nessun film trovato...</p>
+                    )}
                 </div>
             </main>
         </>
