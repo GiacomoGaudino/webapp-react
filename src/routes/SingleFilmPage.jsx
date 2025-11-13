@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import StarRating from "../src/components/StarRating";
+import StarRating from "../components/StarRating";
 
 export default function SingleFilmPage() {
     const { id } = useParams();

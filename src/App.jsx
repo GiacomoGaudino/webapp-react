@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import HomePage from "../routes/HomePage"
-import FilmsPage from "../routes/FilmsPage"
-import SingleFilmPage from "../routes/SingleFilmPage"
-import DefaultLayout from "../layouts/DefaultLayout"
-import DashBoard from "../routes/admin/DashBoard"
-import AdminLayout from "../layouts/AdminLayout"
-import CreateFilm from "../routes/admin/CreateFilm"
+import HomePage from "./routes/HomePage"
+import FilmsPage from "./routes/FilmsPage"
+import SingleFilmPage from "./routes/SingleFilmPage"
+import DefaultLayout from "./layouts/DefaultLayout"
+import DashBoard from "./routes/admin/DashBoard"
+import AdminLayout from "./layouts/AdminLayout"
+import CreateFilm from "./routes/admin/CreateFilm"
 
 
 function App() {

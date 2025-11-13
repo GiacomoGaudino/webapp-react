@@ -1,5 +1,5 @@
-import AppJumbotron from "../src/components/AppJumbotron";
-import sfondo from "../src/assets/img/sfondo.jpg"
+import AppJumbotron from "../components/AppJumbotron.jsx";
+import sfondo from "../assets/img/sfondo.jpg";
 
 export default function HomePage() {
 
