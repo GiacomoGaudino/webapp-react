@@ -18,8 +18,16 @@ export default function DashBoard() {
 
     return (
         <>
-            <div class="container p-5 table-responsive">
-                <table class="table table-striped table-hover align-middle">
+            <div className="container p-5 table-responsive">
+                <div className="banner bg-light-subtle p-3 mb-4">
+                    <div className="container d-flex justify-content-between align-items-center">
+                        <h3>Admin Dashboard</h3>
+                        <Link to="/admin/film/create" className="btn btn-dark">
+                            <i className="bi bi-plus-lg me-2"></i> Film
+                        </Link>
+                    </div>
+                </div>
+                <table className="table table-striped table-hover align-middle">
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
