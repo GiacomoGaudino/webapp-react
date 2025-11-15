@@ -15,6 +15,15 @@ export default function DashBoard() {
             .catch(err => console.error("Errore nel caricamento dei film:", err));
     }, [])
 
+    const handleDelete = (id) => {
+        axios.delete(`http://localhost:3000/api/films/${id}`)
+            .then(res => {
+                console.log(res.data.message);
+                setFilms(prevFilms => prevFilms.filter(film => film.id !== id));
+            })
+            .catch(err => console.error("Errore nella cancellazione:", err));
+    };
+
 
     return (
         <>
@@ -57,7 +66,7 @@ export default function DashBoard() {
                                             </Link>
                                         </button>
                                         <button className="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></button>
-                                        <button className="btn btn-sm btn-danger"><i class="bi bi-trash3"></i></button>
+                                        <button className="btn btn-sm btn-danger" onClick={() => handleDelete(film.id)}><i class="bi bi-trash3"></i></button>
                                     </div>
                                 </td>
                             </tr>
